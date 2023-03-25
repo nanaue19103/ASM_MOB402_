@@ -1,99 +1,71 @@
 <div class="container">
 
-
-    {{!-- Button --}}
-    <div class="row my-4  p-4 my-5 ">
-        {{!-- Go to Add --}}
-        <div class="col-auto">
-            <a class="btn btn-dark" href="/products/create"><i class="fa-solid fa-user-plus"></i> Add new Product</a>
-        </div>
-        {{!-- Find --}}
-        <div class="col-auto ms-auto">
-            
-        </div>
+  <div class="row my-4">
+    <div class="col-auto">
+      <a class="btn btn-primary" href="/products/create"><i class="fas fa-plus"></i> Add new Product</a>
     </div>
+    <div class="col-auto ms-auto">
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-primary" type="submit"><i class="fas fa-search"></i></button>
+      </form>
+    </div>
+  </div>
 
-    {{!-- Table --}}
-    <div class="row">
-        <table class="table table-striped table-borderless table-hover  table-response shadow">
-            {{!-- Head --}}
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>View</th>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Image</th>
-                    <th>Count</th>
-                    <th>Update</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-
-            {{!-- Body --}}
-            <tbody>
-                {{#each products}}
-                <tr>
-                    <th class="align-middle">{{increase @index}}</th>
-                    <td class="align-middle"><a class="btn" href="/products/read/{{this._id}}"><i
-                                class="fa-regular fa-eye"></i></a></td>
-                    <td class="align-middle">{{this.name}}</td>
-                    <td class="align-middle">{{this.price}}</td>
-                    <td class="align-middle">
-                        <img src={{this.img}} width="48px" height="48px" alt="" class="rounded">
-                    </td>
-                    <td class="align-middle">{{this.count}}</td>
-                    <td class="align-middle"><a class="btn" href="/products/update/{{this._id}}"><i
-                                class="fa-regular fa-pen-to-square"></i></a></td>
-                    <td class="align-middle"><button class="btn" type="button" class="btn btn-primary"
-                            data-bs-toggle="modal" data-bs-target="#{{this._id}}"><i
-                                class="fa-regular fa-trash-can"></i></button> </td>
-                </tr>
-                <!-- The Modal -->
-                <div class="modal" id="{{this._id}}">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                                <h4 class="modal-title">Delete Product</h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                            </div>
-                            <!-- Modal body -->
-                            <div class="modal-body">
-                                {{this.name}}
-                            </div>
-                            <!-- Modal footer -->
-                            <div class="modal-footer col-auto">
-                                <a type="button" class="btn btn-danger" href="/products/delete/{{this._id}}">Yes</a>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                            </div>
-                        </div>
+  <div class="row">
+    <div class="col">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">View</th>
+              <th scope="col">Name</th>
+              <th scope="col">Price</th>
+              <th scope="col">Image</th>
+              <th scope="col">Count</th>
+              <th scope="col">Update</th>
+              <th scope="col">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each products}}
+            <tr>
+              <th scope="row">{{increase @index}}</th>
+              <td><a class="btn btn-primary" href="/products/read/{{this._id}}"><i class="far fa-eye"></i></a></td>
+              <td>{{this.name}}</td>
+              <td>{{this.price}}</td>
+              <td><img src="{{this.img}}" alt="{{this.name}}" width="48" height="48"></td>
+              <td>{{this.count}}</td>
+              <td><a class="btn btn-primary" href="/products/update/{{this._id}}"><i class="far fa-edit"></i></a></td>
+              <td>
+                <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal{{this._id}}"><i class="far fa-trash-alt"></i></button>
+                <div class="modal fade" id="deleteModal{{this._id}}" tabindex="-1" aria-labelledby="deleteModal{{this._id}}Label" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModal{{this._id}}Label">Delete Product</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Are you sure you want to delete "{{this.name}}"?</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        <a class="btn btn-danger" href="/products/delete/{{this._id}}">Yes</a>
+                      </div>
                     </div>
+                  </div>
                 </div>
-                {{/each}}
-            </tbody>
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
         </table>
-
-
+      </div>
     </div>
+  </div>
 
-
-    {{!-- Footer --}}
-    <div class="row align-items-center pb-5">
-        {{!-- Item --}}
-        <div class="col-auto">
-            <p class=" my-auto">10/10000 items</p>
-        </div>
-        {{!-- Pagination --}}
-        <div class="col-auto ms-auto">
-            <ul class="pagination justify-content-end my-auto">
-                <li class="page-item"><a class="page-link disabled" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">...</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul>
-        </div>
-    </div>
-</div>
+  <div class="row">
+    <div class="col-auto">
+      <p class="my-3">{{products.length}}

@@ -1,0 +1,35 @@
+{
+  "name": "asm_mob402_hungtvph27819",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch": "node-sass --watch  src/resourse/scss/app.scss src/public/css/app.css",
+    "start": "nodemon --inspect src/index.js",
+    "dev": "concurrently \"npm run watch\" \"npm start\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nanaue19103/ASM_MOB402.git"
+  },
+  "author": "hungtv",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nanaue19103/ASM_MOB402/issues"
+  },
+  "homepage": "https://github.com/nanaue19103/ASM_MOB402#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "bootstrap": "^5.2.3",
+    "concurrently": "^7.6.0",
+    "express": "^4.18.2",
+    "express-handlebars": "^7.0.4",
+    "morgan": "^1.10.0",
+    "node-sass": "^8.0.0",
+    "nodemon": "^2.0.22",
+    "path": "^0.12.7",
+    "sass": "^1.60.0",
+    "scss": "^0.2.4"
+  }
+}
